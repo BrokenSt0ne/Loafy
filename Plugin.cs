@@ -17,6 +17,8 @@ namespace Loafy
     {
         GUIStyle textStyle = new GUIStyle();
         private Scene scene;
+
+        private Boolean advanceNextFrameWhileFrozen = false;
         void Awake()
         {
             Debug.Log("Hello World!!!!!!!!!");
@@ -30,11 +32,18 @@ namespace Loafy
             textStyle.fontStyle = FontStyle.Bold;
             textStyle.normal.textColor = Color.yellow;
             textStyle.fontSize = 36;
+
+            
         }
 
         void Update()
         {
+            if (advanceNextFrameWhileFrozen) {
+                advanceNextFrameWhileFrozen = false;
+                UnityEngine.Time.timeScale = 0f;
+            }
             //ignore horrid code tysm
+            //i will not
             if(Input.GetKeyDown(KeyCode.I))
             {
                 
@@ -65,7 +74,7 @@ namespace Loafy
             }
             if (Input.GetKeyDown(KeyCode.B))
             {
-                UnityEngine.Time.timeScale -= 0.25f;
+                UnityEngine.Time.timeScale *= 0.25f;
             }
             if (Input.GetKeyDown(KeyCode.N))
             {
@@ -73,7 +82,16 @@ namespace Loafy
             }
             if (Input.GetKeyDown(KeyCode.M))
             {
-                UnityEngine.Time.timeScale += 0.25f;
+                UnityEngine.Time.timeScale *= 1.25f;
+            }
+            if (Input.GetKeyDown(KeyCode.Q)) {
+                UnityEngine.Time.timeScale = 0f;
+            }
+            if (Input.GetKeyDown(KeyCode.E)) {
+                if (UnityEngine.Time.timeScale == 0f) {
+                    advanceNextFrameWhileFrozen = true;
+                    UnityEngine.Time.timeScale = 1f;
+                }
             }
 
         }
