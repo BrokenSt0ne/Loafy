@@ -93,11 +93,41 @@ namespace Loafy
                     UnityEngine.Time.timeScale = 1f;
                 }
             }
+            if (Input.GetKeyDown(KeyCode.Y)) {
+                Array objects = FindGameObjectsInLayer(LayerMask.NameToLayer("Lava"));
+                foreach (GameObject gameobject in objects) {
+                    gameobject.GetComponent<BoxCollider2D>().enabled = false;
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.U)) {
+                Array objects = FindGameObjectsInLayer(LayerMask.NameToLayer("Lava"));
+                foreach (GameObject gameobject in objects) {
+                    gameobject.GetComponent<BoxCollider2D>().enabled = true;
+                }
+            }
 
         }
         void OnGUI()
         {
             GUI.Label(new Rect(250, 5, 100, 25), "LOAFY ENABLED", textStyle);
+        }
+
+        GameObject[] FindGameObjectsInLayer(int layer)
+        {
+            var goArray = FindObjectsOfType(typeof(GameObject)) as GameObject[];
+            var goList = new System.Collections.Generic.List<GameObject>();
+            for (int i = 0; i < goArray.Length; i++)
+            {
+                if (goArray[i].layer == layer)
+                {
+                    goList.Add(goArray[i]);
+                }
+            }
+            if (goList.Count == 0)
+            {
+                return null;
+            }
+            return goList.ToArray();
         }
     }
 }
