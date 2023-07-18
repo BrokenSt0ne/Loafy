@@ -5,7 +5,7 @@ using BepInEx;
 
 namespace Loafy
 {
-    [BepInPlugin("Pheonix.Loafy", "Loafy", "1.0.1")]
+    [BepInPlugin("Pheonix.Loafy", "Loafy", "1.0.2")]
     public class Plugin : BaseUnityPlugin
     {
         private GameObject Loaf;
