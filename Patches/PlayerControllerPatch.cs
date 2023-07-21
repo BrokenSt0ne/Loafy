@@ -15,7 +15,14 @@ namespace Loafy.Patches
         [HarmonyPrefix]
         private static bool PlayerControllerRewrite(PlayerController __instance, ref bool ___isGrounded, ref bool ___isSprinting, ref Rigidbody2D ___rb)
         {
-            ___isGrounded = Physics2D.OverlapCircle(__instance.groundCheck.position, __instance.groundCheckRadius, __instance.whatIsGround);
+            if (Plugin.airJumpEnabled)
+            {
+                ___isGrounded = true;
+            }
+            else
+            {
+                ___isGrounded = Physics2D.OverlapCircle(__instance.groundCheck.position, __instance.groundCheckRadius, __instance.whatIsGround);
+            }
             float axis = Input.GetAxis("Horizontal");
             if (___isSprinting)
             {
