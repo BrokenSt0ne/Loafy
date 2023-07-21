@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using UnityEngine;
 
 namespace Loafy.Patches
@@ -8,6 +8,9 @@ namespace Loafy.Patches
     internal class PlayerControllerPatch
     {
         private static bool facingLeft;
+
+        //easier to tell wether you're skipping the method or not i would say this improves readablility 
+        private static bool SkipMethod(bool skip) => !skip;
 
         [HarmonyPrefix]
         private static bool PlayerControllerRewrite(PlayerController __instance, ref bool ___isGrounded, ref bool ___isSprinting, ref Rigidbody2D ___rb)
@@ -61,8 +64,7 @@ namespace Loafy.Patches
                 __instance.moveSpeed = 10f * Plugin.loafScale;
             }
 
-            //skips the original method
-            return false;
+            return SkipMethod(true);
         }
     }
 }
