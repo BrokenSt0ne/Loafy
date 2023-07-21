@@ -21,7 +21,7 @@ namespace Loafy
         private Scene scene;
 
         private bool advanceNextFrameWhileFrozen = false;
-        private bool airJumpEnabled = false;
+        public static bool airJumpEnabled = false;
 
 
         private void Awake()
@@ -178,12 +178,10 @@ namespace Loafy
             airJumpEnabled = active;
             if (active)
             {
-                playerController.groundCheckRadius = 9999f;
                 loafBoxCollider.enabled = false;
                 loafCircleCollider.enabled = false;
                 return;
             }
-            playerController.groundCheckRadius = 0.2f;
             loafBoxCollider.enabled = true;
             loafCircleCollider.enabled = true;
         }
